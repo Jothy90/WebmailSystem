@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -16,6 +16,7 @@
 
     <!--icheck-->
     <link href="resources/css/minimal.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-wysihtml5.css" />
 
     <!-- Custom styles for this template -->
     <link href="resources/css/style3860.css?v=1" rel="stylesheet">
@@ -74,7 +75,7 @@
         <div class="col-sm-3">
             <section class="panel">
                 <div class="panel-body">
-                    <a href="mail_compose.html"  class="btn btn-compose">
+                    <a href="compose.jsp"  class="btn btn-compose">
                         Compose Mail
                     </a>
                     <ul class="nav nav-pills nav-stacked mail-nav">
@@ -90,7 +91,7 @@
         <div class="col-sm-9">
             <section class="panel">
                 <header class="panel-heading wht-bg">
-                    <h4 class="gen-case"> View Message
+                    <h4 class="gen-case"> Compose Mail
                         <form action="#" class="pull-right mail-src-position">
                             <div class="input-append">
                                 <input type="text" class="form-control " placeholder="Search Mail">
@@ -98,43 +99,50 @@
                         </form>
                     </h4>
                 </header>
-                <div class="panel-body ">
+                <div class="panel-body">
+                    <div class="compose-btn pull-right">
+                        <button class="btn btn-primary btn-sm"><i class="fa fa-check"></i> Send</button>
+                        <button class="btn btn-sm"><i class="fa fa-times"></i> Discard</button>
+                        <button class="btn btn-sm">Draft</button>
+                    </div>
+                    <div class="compose-mail">
+                        <form role="form-horizontal" method="post" action="sent">
+                            <div class="form-group">
+                                <label for="to" class="">To:</label>
+                                <input type="text" name="to" tabindex="1" id="to" class="form-control">
 
-                    <div class="mail-header row">
-                        <div class="col-md-8">
-                            <h4 class="pull-left"> Bucket Admin Bootstrap 3 Responsive Flat Dashboard </h4>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="compose-btn pull-right">
-                                <a href="mail_compose.html" class="btn btn-sm btn-primary" ><i class="fa fa-reply"></i> Reply</a>
-                                <button class="btn  btn-sm tooltips" data-original-title="Print" type="button" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-print"></i> </button>
-                                <button class="btn btn-sm tooltips" data-original-title="Trash" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-trash-o"></i></button>
+                                <div class="compose-options">
+                                    <a onclick="$(this).hide(); $('#cc').parent().removeClass('hidden'); $('#cc').focus();" href="javascript:;">Cc</a>
+                                    <a onclick="$(this).hide(); $('#bcc').parent().removeClass('hidden'); $('#bcc').focus();" href="javascript:;">Bcc</a>
+                                </div>
                             </div>
-                        </div>
 
-                    </div>
-                    <div class="mail-sender">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <strong>ThemeBucket</strong>
-                                to
-                                <strong>me</strong>
+                            <div class="form-group hidden">
+                                <label for="cc" class="">Cc:</label>
+                                <input type="text" tabindex="2" id="cc" class="form-control">
                             </div>
-                            <div class="col-md-4">
-                                <p class="date"> 10:15AM 02 FEB 2014</p>
+
+                            <div class="form-group hidden">
+                                <label for="bcc" class="">Bcc:</label>
+                                <input type="text" tabindex="2" id="bcc" class="form-control">
                             </div>
-                        </div>
-                    </div>
-                    <div class="view-mail">
-                        <p>Donec ultrices faucibus rutrum. Phasellus sodales vulputate urna, vel accumsan augue egestas ac. Donec vitae leo at sem lobortis porttitor eu consequat risus. Mauris sed congue orci. Donec ultrices faucibus rutrum. Phasellus sodales vulputate urna, vel accumsan augue egestas ac. Donec vitae leo at sem lobortis porttitor eu consequat risus. Mauris sed congue orci. Donec ultrices faucibus rutrum. Phasellus sodales vulputate urna, vel accumsan augue egestas ac. Donec vitae leo at sem lobortis porttitor eu consequat risus. Mauris sed congue orci. </p>
-                        <p>Porttitor eu consequat risus. Mauris sed congue orci. Donec ultrices <a href="#">faucibus rutrum</a>. Phasellus sodales vulputate urna, vel accumsan augue egestas ac. Donec vitae leo at sem lobortis porttitor eu consequat risus. Mauris sed congue orci. Donec ultrices faucibus rutrum. Phasellus sodales vulputate urna, vel accumsan augue egestas ac. Donec vitae leo at sem lobortis porttitor eu consequat risus. Mauris sed congue orci. </p>
-                        <p>Sodales vulputate urna, vel <a href="#">accumsan augue egestas ac</a>. Donec vitae leo at sem lobortis porttitor eu consequat risus. Mauris sed congue orci. Donec ultrices faucibus rutrum. Phasellus sodales vulputate urna, vel accumsan augue egestas ac. Donec vitae leo at sem lobortis porttitor eu consequat risus. Mauris sed congue orci. </p>
-                    </div>
-                    <div class="compose-btn pull-left">
-                        <a href="mail_compose.html" class="btn btn-sm btn-primary" ><i class="fa fa-reply"></i> Reply</a>
-                        <button class="btn btn-sm " ><i class="fa fa-arrow-right"></i> Forward</button>
-                        <button class="btn  btn-sm tooltips" data-original-title="Print" type="button" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-print"></i> </button>
-                        <button class="btn btn-sm tooltips" data-original-title="Trash" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-trash-o"></i></button>
+
+                            <div class="form-group">
+                                <label for="subject" class="">Subject:</label>
+                                <input type="text" name="subject" tabindex="1" id="subject" class="form-control">
+                            </div>
+
+                            <div class="compose-editor">
+                                <textarea class="wysihtml5 form-control" name="body" rows="9"></textarea>
+                                <%--<input type="file" class="default">--%>
+                            </div>
+                            <div class="compose-btn">
+                                <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-check"></i> Send</button>
+                                <button class="btn btn-sm"><i class="fa fa-times"></i> Discard</button>
+                                <%--<button class="btn btn-sm">Draft</button>--%>
+                            </div>
+
+                        </form>
                     </div>
                 </div>
             </section>
@@ -142,7 +150,14 @@
     </div>
 
 
+<!-- Main component for a primary marketing message or call to action -->
+
+
 </div>
+
+<!--jQuery Flot Chart-->
+<script type="text/javascript" src="resources/js/wysihtml5-0.3.0.js"></script>
+<script type="text/javascript" src="resources/js/bootstrap-wysihtml5.js"></script>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="resources/js/jquery-1.11.0.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -150,7 +165,13 @@
 
 <script src="resources/js/jquery.icheck.js"></script>
 
+<script type="text/javascript">
+    //wysihtml5 start
 
+    $('.wysihtml5').wysihtml5();
+
+    //wysihtml5 end
+</script>
 
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.kash.mail.repository.model;
 
+import java.util.Random;
+
 /**
  * Created with IntelliJ IDEA.
  * User: 123
@@ -70,5 +72,22 @@ public class Email {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public static Email getAMail(){
+
+        Random rand = new Random();
+        int max=100;
+        int min=1;
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+
+        Email email=new Email();
+        email.setId(randomNum);
+        email.setSendTo("Kamalan");
+        email.setSendFrom("Kashing");
+        email.setSubject("Test");
+        email.setDate("2015-06-10");
+        email.setMessage("This is a Test Message");
+        return email;
     }
 }

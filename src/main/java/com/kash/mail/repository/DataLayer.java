@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -91,7 +92,7 @@ public class DataLayer {
         return true;
     }
 
-    public static ResultSet loadSendEmails(int userId){
+    public static List<Email> loadSendEmails(int userId){
         String getUserNameQuery = "select user_name from login where user_id = " + userId;
         ResultSet rs = null;
         String userName = null;
@@ -110,19 +111,30 @@ public class DataLayer {
         }
 
         String getSendEmailQuery = "select * from email_message where send_from = '" + userName + "'";
-
+        List<Email> list=new ArrayList<Email>();
+        Email email;
         try {
             Connection con = DbConnection.getConnection();
             Statement stmt = con.createStatement();
             rs = stmt.executeQuery(getSendEmailQuery);
+            while (rs.next()) {
+                email=new Email();
+                email.setId(rs.getInt("id"));
+                email.setCc(rs.getString("cc"));
+                email.setDate(rs.getString("date"));
+                email.setMessage(rs.getString("message"));
+                email.setSendFrom(rs.getString("from"));
+                email.setSendTo("to");
+                list.add(email);
+            }
             con.close();
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-       return rs;
+        return list;
     }
 
-    public static ResultSet loadInboxMail(int userId){
+    public static List<Email> loadInboxMails(int userId){
 
         String getUserNameQuery = "select user_name from login where user_id = " + userId;
         ResultSet rs = null;
@@ -142,16 +154,29 @@ public class DataLayer {
         }
 
         String getSendEmailQuery = "select * from email_message where send_to = '" + userName + "'";
+        List<Email> list=new ArrayList<Email>();
+        Email email;
 
         try {
             Connection con = DbConnection.getConnection();
             Statement stmt = con.createStatement();
             rs = stmt.executeQuery(getSendEmailQuery);
+            while (rs.next()) {
+                email=new Email();
+                email.setId(rs.getInt("id"));
+                email.setCc(rs.getString("cc"));
+                email.setDate(rs.getString("date"));
+                email.setMessage(rs.getString("message"));
+                email.setSendFrom(rs.getString("from"));
+                email.setSendTo("to");
+                list.add(email);
+            }
+
             con.close();
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        return rs;
+        return list;
 
     }
 
@@ -172,7 +197,7 @@ public class DataLayer {
         return true;
     }
 
-    public static ArrayList<String> loadEmailUsers(){
+    public static List<String> loadEmailUsers(){
         String query = "select user_name from login";
         ArrayList<String> users = new ArrayList<String>();
         try {
@@ -188,5 +213,29 @@ public class DataLayer {
         }
 
         return users;
+    }
+
+    public static Email getEmailById(int id) {
+
+        String getSendEmailQuery = "select * from email_message where id = '" + id + "'";
+        Email email=null;
+        try {
+            Connection con = DbConnection.getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet rs  = stmt.executeQuery(getSendEmailQuery);
+            if (rs.next()) {
+                email=new Email();
+                email.setId(rs.getInt("id"));
+                email.setCc(rs.getString("cc"));
+                email.setDate(rs.getString("date"));
+                email.setMessage(rs.getString("message"));
+                email.setSendFrom(rs.getString("from"));
+                email.setSendTo("to");
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        return email;
     }
 }

@@ -1,8 +1,11 @@
 package com.kash.mail.servlet;
 
+import com.kash.mail.repository.DataLayer;
+import com.kash.mail.repository.model.Email;
 import com.kash.mail.repository.model.LoginUser;
 import com.kash.mail.repository.model.UserProfile;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 
 public class Register extends HttpServlet {
@@ -25,15 +29,26 @@ public class Register extends HttpServlet {
         userProfile.setLastName(request.getParameter("lastName"));
         userProfile.setAddress(request.getParameter("address"));
         userProfile.setMobileNo(request.getParameter("mobile"));
-
         loginUser.setUserName(request.getParameter("userName"));
         loginUser.setPassword(request.getParameter("password"));
-        response.setContentType("text/html");
-        HttpSession session = request.getSession(true);
+        DataLayer.insertNewUser(userProfile,loginUser);
 
-        session.setAttribute("userName", loginUser.getUserName());
-        session.setAttribute("userId", loginUser.getUserName());
-        response.sendRedirect("inbox.jsp");
+
+        int userId=DataLayer.getUserId(loginUser);
+        loginUser.setId(userId);
+
+        List<Email> inboxMails= DataLayer.loadInboxMails(userId);
+        List<Email> sendEmails= DataLayer.loadSendEmails(userId);
+        HttpSession session = request.getSession(true);
+        session.setAttribute("inboxMails",inboxMails);
+        session.setAttribute("sendEmails",sendEmails);
+        session.setAttribute("user", loginUser);
+
+        //response.setContentType("text/html");
+        //response.sendRedirect("inbox.jsp");
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/inbox.jsp");
+        dispatcher.forward(request, response);
     }
 }
    

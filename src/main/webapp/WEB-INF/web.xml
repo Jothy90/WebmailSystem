@@ -41,6 +41,33 @@
         <url-pattern>/sent</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>mail</servlet-name>
+        <servlet-class>com.kash.mail.servlet.LoadMail</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>mail</servlet-name>
+        <url-pattern>/mail</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>inbox</servlet-name>
+        <servlet-class>com.kash.mail.servlet.Inbox</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>inbox</servlet-name>
+        <url-pattern>/inbox</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>outbox</servlet-name>
+        <servlet-class>com.kash.mail.servlet.Outbox</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>outbox</servlet-name>
+        <url-pattern>/outbox</url-pattern>
+    </servlet-mapping>
+
 
     <session-config>
         <session-timeout>
