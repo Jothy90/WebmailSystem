@@ -8,6 +8,7 @@ package com.kash.mail.repository.model;
  * To change this template use File | Settings | File Templates.
  */
 public class LoginUser {
+    private int id;
     private String userName;
     private String password;
 
@@ -25,5 +26,13 @@ public class LoginUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

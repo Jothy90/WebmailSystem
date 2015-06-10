@@ -8,12 +8,14 @@ package com.kash.mail.repository.model;
  * To change this template use File | Settings | File Templates.
  */
 public class UserProfile {
+    private int id;
     String firstName;
     String lastName;
     String address;
     String birthday;
     boolean isMale;
     String mobileNo;
+    private int userId;
 
     public String getFirstName() {
         return firstName;
@@ -61,5 +63,21 @@ public class UserProfile {
 
     public void setMobileNo(String mobileNo) {
         this.mobileNo = mobileNo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
