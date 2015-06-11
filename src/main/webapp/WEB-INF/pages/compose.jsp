@@ -46,7 +46,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">kmail</a>
+            <a class="navbar-brand" href="inbox">kmail</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -75,12 +75,12 @@
         <div class="col-sm-3">
             <section class="panel">
                 <div class="panel-body">
-                    <a href="compose.jsp"  class="btn btn-compose">
+                    <a href="compose"  class="btn btn-compose">
                         Compose Mail
                     </a>
                     <ul class="nav nav-pills nav-stacked mail-nav">
-                        <li class="active"><a href="mail.html"> <i class="fa fa-inbox"></i> Inbox  <span class="label label-danger pull-right inbox-notification">9</span></a></li>
-                        <li><a href="#"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
+                        <li class="active"><a href="inbox"> <i class="fa fa-inbox"></i> Inbox  <span class="label label-danger pull-right inbox-notification">9</span></a></li>
+                        <li><a href="outbox"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
                         <li><a href="#"> <i class="fa fa-certificate"></i> Important</a></li>
                         <li><a href="#"> <i class="fa fa-file-text-o"></i> Drafts <span class="label label-info pull-right inbox-notification">123</span></a></li>
                         <li><a href="#"> <i class="fa fa-trash-o"></i> Trash</a></li>
@@ -108,8 +108,13 @@
                     <div class="compose-mail">
                         <form role="form-horizontal" method="post" action="sent">
                             <div class="form-group">
-                                <label for="to" class="">To:</label>
-                                <input type="text" name="to" tabindex="1" id="to" class="form-control">
+                                <label for="source" class="">To:</label>
+                                <select class="form-control"  style="width: 300px" id="source">
+                                    <c:forEach items="${emails}" var="name" varStatus="count">
+                                    <option value="<c:out value="${count}"/>"><c:out value="${name}"/></option>
+                                    </c:forEach>
+                                </select>
+                                <input type="hidden" name="to" tabindex="1" id="to" class="form-control">
 
                                 <div class="compose-options">
                                     <a onclick="$(this).hide(); $('#cc').parent().removeClass('hidden'); $('#cc').focus();" href="javascript:;">Cc</a>
@@ -171,6 +176,15 @@
     $('.wysihtml5').wysihtml5();
 
     //wysihtml5 end
+</script>
+<script type="text/javascript">
+    function submitIt(){
+        var e = document.getElementById("source");
+        var strUser = e.options[e.selectedIndex].text;
+        document.getElementById("to").value=strUser;
+        return true;
+    }
+
 </script>
 
 </body>

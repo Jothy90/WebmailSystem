@@ -45,7 +45,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">kmail</a>
+            <a class="navbar-brand" href="inbox">kmail</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -74,13 +74,13 @@
         <div class="col-sm-3">
             <section class="panel">
                 <div class="panel-body">
-                    <a href="compose.jsp" class="btn btn-compose">
+                    <a href="compose" class="btn btn-compose">
                         Compose Mail
                     </a>
                     <ul class="nav nav-pills nav-stacked mail-nav">
-                        <li class="active"><a href="mail.html"> <i class="fa fa-inbox"></i> Inbox <span
+                        <li class="active"><a href="inbox"> <i class="fa fa-inbox"></i> Inbox <span
                                 class="label label-danger pull-right inbox-notification">9</span></a></li>
-                        <li><a href="#"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
+                        <li><a href="outbox"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
                         <li><a href="#"> <i class="fa fa-certificate"></i> Important</a></li>
                         <li><a href="#"> <i class="fa fa-file-text-o"></i> Drafts <span
                                 class="label label-info pull-right inbox-notification">123</span></a></li>
@@ -148,11 +148,11 @@
                                             <input type="checkbox" class="mail-checkbox">
                                         </td>
                                         <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
-                                        <td class="view-message  dont-show"><a href="mail_view.html"><c:out
-                                                value="${mail.sendFrom}"/></a></td>
-                                        <td class="view-message "><a href="mail_view.html"><c:out value="${mail.subject}"/></a>
+                                        <td class="view-message  dont-show"><a href="mail?id=<c:out value="${mail.id}"/>">
+                                            <c:out value="${mail.sendFrom}"/></a></td>
+                                        <td class="view-message "><a href="mail?id=<c:out value="${mail.id}"/>"><c:out value="${mail.subject}"/></a>
                                         </td>
-                                        <td class="view-message  inbox-small-cells"><i class="fa fa-trash-o"></i></td>
+                                        <td class="view-message  inbox-small-cells"><a href="delete?id=<c:out value="${mail.id}"/>"><i class="fa fa-trash-o"></i></a></td>
                                         <td class="view-message  text-right"><c:out value="${mail.date}"/></td>
                                     </tr>
                                 </c:forEach>

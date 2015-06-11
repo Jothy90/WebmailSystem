@@ -51,7 +51,7 @@
 
         </div>
     </form>
-    <form action="registerMe" class="form-signin">
+    <form action="registerMe" class="form-signin" method="post">
         <!-- Modal -->
         <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal"
              class="modal fade">

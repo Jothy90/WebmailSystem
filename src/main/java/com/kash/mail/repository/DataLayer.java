@@ -110,7 +110,7 @@ public class DataLayer {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
 
-        String getSendEmailQuery = "select * from email_message where send_from = '" + userName + "'";
+        String getSendEmailQuery = "select * from email_message,email_receiver where sender = '" + userName + "' and email_message.is_active = " + 1 + " and email_message.id = email_receiver.email_id" ;
         List<Email> list=new ArrayList<Email>();
         Email email;
         try {
@@ -120,11 +120,12 @@ public class DataLayer {
             while (rs.next()) {
                 email=new Email();
                 email.setId(rs.getInt("id"));
-                email.setCc(rs.getString("cc"));
+//                email.setCc(rs.getString("cc"));
                 email.setDate(rs.getString("date"));
                 email.setMessage(rs.getString("message"));
-                email.setSendFrom(rs.getString("from"));
-                email.setSendTo("to");
+                email.setSendFrom(rs.getString("sender"));
+                email.setSendTo(rs.getString("receiver"));
+                email.setSubject(rs.getString("subject"));
                 list.add(email);
             }
             con.close();
@@ -136,7 +137,7 @@ public class DataLayer {
 
     public static List<Email> loadInboxMails(int userId){
 
-        String getUserNameQuery = "select user_name from login where user_id = " + userId;
+        String getUserNameQuery = "select user_name from login where user_id = " + userId ;
         ResultSet rs = null;
         String userName = null;
         try {
@@ -153,7 +154,9 @@ public class DataLayer {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
 
-        String getSendEmailQuery = "select * from email_message where send_to = '" + userName + "'";
+//        String getSendEmailQuery = "select * from email_message where send_to = '" + userName + "'";
+        String getSendEmailQuery = "select * from email_message,email_receiver where receiver = '" + userName + "' and email_receiver.is_active = " + 1 + " and email_message.id = email_receiver.email_id" ;
+        System.out.println(getSendEmailQuery);
         List<Email> list=new ArrayList<Email>();
         Email email;
 
@@ -164,11 +167,12 @@ public class DataLayer {
             while (rs.next()) {
                 email=new Email();
                 email.setId(rs.getInt("id"));
-                email.setCc(rs.getString("cc"));
+//                email.setCc(rs.getString("cc"));
                 email.setDate(rs.getString("date"));
                 email.setMessage(rs.getString("message"));
-                email.setSendFrom(rs.getString("from"));
-                email.setSendTo("to");
+                email.setSendFrom(rs.getString("sender"));
+                email.setSendTo(rs.getString("receiver"));
+                email.setSubject(rs.getString("subject"));
                 list.add(email);
             }
 
@@ -181,12 +185,50 @@ public class DataLayer {
     }
 
     public static boolean insertMail(Email email){
-        String query = "insert into email_message ([send_from], [send_to], [date], [cc], [subject], [message]) values ( " + "'" + email.getSendFrom() + "' , '" + email.getSendTo() + "' , ' " + email.getDate() + "' , '" + email.getCc() + "' , '" + email.getSubject()+ "' , '" + email.getMessage()+ "' )" ;
-
+//        String query = "insert into email_message ([send_from], [send_to], [date], [cc], [subject], [message]) values ( " + "'" + email.getSendFrom() + "' , '" + email.getSendTo() + "' , ' " + email.getDate() + "' , '" + email.getCc() + "' , '" + email.getSubject()+ "' , '" + email.getMessage()+ "' )" ;
+//        String query1 = "insert into email_message([sender], [date], [message], [subject], [is_active]), email_receiver([receiver], [is_active], [email_id]) values ("
+        //String query ="insert into email_message([sender], [date], [message], [subject], [is_active])values ('abs', '27/04/2012', 'hi', 'panni subject',1)";
+        ResultSet rs;
+        int id2 = 0;
+        String query = "insert into email_message([sender], [date], [message], [subject], [is_active]) values(  " + "'" + email.getSendFrom() + "' , ' " + email.getDate() + "' , '" + email.getMessage() + "' , '" + email.getSubject()+ "' ," + 1 + ")" ;
+        System.out.println(query);
+        String getEmailIdquery = "select max(id) as max_id from email_message where sender = '" + email.getSendFrom() + "'";
+        System.out.println(getEmailIdquery);
         try {
             Connection conn = DbConnection.getConnection();
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(query);
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (Exception e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        try {
+            Connection conn = DbConnection.getConnection();
+            Statement stmt = conn.createStatement();
+            rs =stmt.executeQuery(getEmailIdquery);
+
+            while (rs.next()){
+               id2 = rs.getInt("max_id");
+
+            }
+
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (Exception e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        String query1 = "insert into email_receiver ([receiver],[is_active], [email_id]) values ( " + "'" + email.getSendTo() + "' ,  " + 1 + " , " + id2 + ")";
+        System.out.println(query1);
+
+        try {
+            Connection conn = DbConnection.getConnection();
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(query1);
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
@@ -217,7 +259,8 @@ public class DataLayer {
 
     public static Email getEmailById(int id) {
 
-        String getSendEmailQuery = "select * from email_message where id = '" + id + "'";
+        String getSendEmailQuery = "select * from email_message,email_receiver where email_message.id = " + id + " and  email_receiver.email_id = " + id;
+        System.out.println(getSendEmailQuery);
         Email email=null;
         try {
             Connection con = DbConnection.getConnection();
@@ -226,16 +269,70 @@ public class DataLayer {
             if (rs.next()) {
                 email=new Email();
                 email.setId(rs.getInt("id"));
-                email.setCc(rs.getString("cc"));
+//                email.setCc(rs.getString("cc"));
                 email.setDate(rs.getString("date"));
                 email.setMessage(rs.getString("message"));
-                email.setSendFrom(rs.getString("from"));
-                email.setSendTo("to");
+                email.setSendFrom(rs.getString("sender"));
+                email.setSendTo(rs.getString("receiver"));
+                email.setSubject(rs.getString("subject"));
             }
             con.close();
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
         return email;
+    }
+
+    public static boolean deleteEmail(int emailId, String userName){
+        ResultSet rs;
+        String senderName = null;
+        String query = "select sender from email_message where id = " + emailId ;
+        String updatedSenderQuery = "update email_message set is_active = " + 0 + " where id = " + emailId ;
+        String updatedReceiverQuery = "update email_receiver set is_active = " + 0 + " where email_id = " + emailId ;
+
+        try {
+            Connection conn = DbConnection.getConnection();
+            Statement stmt = conn.createStatement();
+            rs =stmt.executeQuery(query);
+
+            while (rs.next()){
+                senderName = rs.getString("sender");
+            }
+
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (Exception e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        if (userName.equals(senderName)){
+            System.out.println(updatedSenderQuery);
+            try {
+                Connection conn = DbConnection.getConnection();
+                Statement stmt = conn.createStatement();
+                stmt.executeUpdate(updatedSenderQuery);
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            } catch (Exception e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }else{
+            try {
+                System.out.println(updatedReceiverQuery);
+                Connection conn = DbConnection.getConnection();
+                Statement stmt = conn.createStatement();
+                stmt.executeUpdate(updatedReceiverQuery);
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            } catch (Exception e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        }
+
+        return true;
+
     }
 }

@@ -68,6 +68,25 @@
         <url-pattern>/outbox</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>compose</servlet-name>
+        <servlet-class>com.kash.mail.servlet.Compose</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>compose</servlet-name>
+        <url-pattern>/compose</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>delete</servlet-name>
+        <servlet-class>com.kash.mail.servlet.DeleteMail</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>delete</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
+
 
     <session-config>
         <session-timeout>
