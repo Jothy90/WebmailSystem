@@ -4,6 +4,7 @@ import com.kash.mail.repository.DataLayer;
 import com.kash.mail.repository.model.Email;
 import com.kash.mail.repository.model.LoginUser;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +27,8 @@ public class Inbox extends HttpServlet {
         if(session.getAttribute("user")!=null){
             List<Email> inboxMails= DataLayer.loadInboxMails(((LoginUser)session.getAttribute("user")).getId());
             session.setAttribute("inboxMails",inboxMails);
-            response.sendRedirect("inbox");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/inbox.jsp");
+            dispatcher.forward(request, response);
         }else{
             session.setAttribute("error", "Session Expired");
             response.sendRedirect("login.jsp");
