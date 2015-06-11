@@ -36,7 +36,7 @@ public class Login extends HttpServlet {
             List<Email> inboxMails= DataLayer.loadInboxMails(userId);
             List<Email> sendEmails= DataLayer.loadSendEmails(userId);
 
-            session.invalidate();
+            //session.invalidate();
             session.setAttribute("user", user);
             session.setAttribute("inboxMails",inboxMails);
             session.setAttribute("sendEmails",sendEmails);
