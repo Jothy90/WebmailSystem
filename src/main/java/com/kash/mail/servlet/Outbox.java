@@ -4,7 +4,6 @@ import com.kash.mail.repository.DataLayer;
 import com.kash.mail.repository.model.Email;
 import com.kash.mail.repository.model.LoginUser;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,10 +23,14 @@ public class Outbox extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(true);
 
-        List<Email> sendEmails= DataLayer.loadSendEmails(((LoginUser) session.getAttribute("user")).getId());
-        session.setAttribute("sendEmails",sendEmails);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/outbox.jsp");
-        dispatcher.forward(request, response);
+        if(session.getAttribute("user")!=null){
+            List<Email> sendEmails= DataLayer.loadSendEmails(((LoginUser) session.getAttribute("user")).getId());
+            session.setAttribute("sendEmails",sendEmails);
+            response.sendRedirect("inbox");
+        }else{
+            session.setAttribute("error", "Session Expired");
+            response.sendRedirect("login.jsp");
+        }
     }
 }
    

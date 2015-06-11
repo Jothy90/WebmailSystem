@@ -51,10 +51,10 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kashing
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">${user.userName}
                         <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="login.jsp">Sign Out</a></li>
+                        <li><a href="logout">Sign Out</a></li>
                         <li class="divider"></li>
                         <li><a href="#">About kmail</a></li>
                     </ul>
@@ -101,7 +101,7 @@
                 </header>
                 <div class="panel-body">
                     <div class="compose-btn pull-right">
-                        <button class="btn btn-primary btn-sm"><i class="fa fa-check"></i> Send</button>
+                        <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> Send</button>
                         <button class="btn btn-sm"><i class="fa fa-times"></i> Discard</button>
                         <button class="btn btn-sm">Draft</button>
                     </div>

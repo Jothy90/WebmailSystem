@@ -50,10 +50,10 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Kashing
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">${user.userName}
                         <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="login.jsp">Sign Out</a></li>
+                        <li><a href="logout">Sign Out</a></li>
                         <li class="divider"></li>
                         <li><a href="#">About kmail</a></li>
                     </ul>

@@ -21,10 +21,16 @@ public class Compose extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(true);
-        List<String> emails=DataLayer.loadEmailUsers();
-        session.setAttribute("emails",emails);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/compose.jsp");
-        dispatcher.forward(request, response);
+        if(session.getAttribute("user")!=null){
+            List<String> emails=DataLayer.loadEmailUsers();
+            session.setAttribute("emails",emails);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/compose.jsp");
+            dispatcher.forward(request, response);
+        }else{
+            session.setAttribute("error", "Session Expired");
+            response.sendRedirect("login.jsp");
+        }
+
     }
 }
    

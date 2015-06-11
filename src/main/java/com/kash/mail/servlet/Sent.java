@@ -4,7 +4,6 @@ import com.kash.mail.repository.DataLayer;
 import com.kash.mail.repository.model.Email;
 import com.kash.mail.repository.model.LoginUser;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,26 +25,26 @@ public class Sent extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(true);
-        Email email=new Email();
-        email.setSendTo(request.getParameter("to"));
-        email.setSubject(request.getParameter("subject"));
-        email.setMessage(request.getParameter("body"));
-        email.setSendFrom(((LoginUser)session.getAttribute("user")).getUserName());
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        Date date = new Date();
-        email.setDate(dateFormat.format(date)); //2014/08/06 15:59:48
-        DataLayer.insertMail(email);
+        if(session.getAttribute("user")!=null){
+            Email email=new Email();
+            email.setSendTo(request.getParameter("to"));
+            email.setSubject(request.getParameter("subject"));
+            email.setMessage(request.getParameter("body"));
+            email.setSendFrom(((LoginUser)session.getAttribute("user")).getUserName());
 
-        List<Email> sendEmails= DataLayer.loadSendEmails(((LoginUser)session.getAttribute("user")).getId());
-        session.setAttribute("sendEmails",sendEmails);
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            email.setDate(dateFormat.format(date)); //2014/08/06 15:59:48
+            DataLayer.insertMail(email);
 
-
-        //response.setContentType("text/html");
-        //response.sendRedirect("inbox.jsp");
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/inbox.jsp");
-        dispatcher.forward(request, response);
+            List<Email> sendEmails= DataLayer.loadSendEmails(((LoginUser)session.getAttribute("user")).getId());
+            session.setAttribute("sendEmails",sendEmails);
+            response.sendRedirect("inbox");
+        }else{
+            session.setAttribute("error", "Session Expired");
+            response.sendRedirect("login.jsp");
+        }
     }
 }
    

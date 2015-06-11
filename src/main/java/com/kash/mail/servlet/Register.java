@@ -5,7 +5,6 @@ import com.kash.mail.repository.model.Email;
 import com.kash.mail.repository.model.LoginUser;
 import com.kash.mail.repository.model.UserProfile;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -43,12 +42,7 @@ public class Register extends HttpServlet {
         session.setAttribute("inboxMails",inboxMails);
         session.setAttribute("sendEmails",sendEmails);
         session.setAttribute("user", loginUser);
-
-        //response.setContentType("text/html");
-        //response.sendRedirect("inbox.jsp");
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/inbox.jsp");
-        dispatcher.forward(request, response);
+        response.sendRedirect("inbox");
     }
 }
    

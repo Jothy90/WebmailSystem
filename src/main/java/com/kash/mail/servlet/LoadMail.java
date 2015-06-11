@@ -21,13 +21,16 @@ public class LoadMail extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession(true);
-        Email email= DataLayer.getEmailById(Integer.parseInt(request.getParameter("id")));
 
-        session.setAttribute("email", email);
-        //response.setContentType("text/html");
-        //response.sendRedirect("WEB-INF/pages/mail.jsp");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/mail.jsp");
-        dispatcher.forward(request, response);
+        if(session.getAttribute("user")!=null){
+            Email email= DataLayer.getEmailById(Integer.parseInt(request.getParameter("id")));
+            session.setAttribute("email", email);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/mail.jsp");
+            dispatcher.forward(request, response);
+        }else{
+            session.setAttribute("error", "Session Expired");
+            response.sendRedirect("login.jsp");
+        }
     }
 }
    

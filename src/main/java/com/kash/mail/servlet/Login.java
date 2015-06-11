@@ -36,6 +36,7 @@ public class Login extends HttpServlet {
             List<Email> inboxMails= DataLayer.loadInboxMails(userId);
             List<Email> sendEmails= DataLayer.loadSendEmails(userId);
 
+            session.invalidate();
             session.setAttribute("user", user);
             session.setAttribute("inboxMails",inboxMails);
             session.setAttribute("sendEmails",sendEmails);
@@ -45,8 +46,8 @@ public class Login extends HttpServlet {
             //response.setContentType("text/html");
             //response.sendRedirect("inbox.jsp");
         } else {
-            request.setAttribute("Response", "Invalid User name and password");
-            getServletContext().getNamedDispatcher("member").forward(request, response);
+            session.setAttribute("error", "Invalid User name and password");
+            response.sendRedirect("login.jsp");
         }
 
     }
