@@ -24,7 +24,7 @@ public class Compose extends HttpServlet {
         if(session.getAttribute("user")!=null){
             List<String> emails=DataLayer.loadEmailUsers();
             session.setAttribute("emails",emails);
-            session.setAttribute("senderId",emails.indexOf(request.getAttribute("reply")));
+            session.setAttribute("senderId",emails.indexOf(request.getParameter("reply")));
             RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/compose.jsp");
             dispatcher.forward(request, response);
         }else{

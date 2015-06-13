@@ -16,7 +16,7 @@
 
     <!--icheck-->
     <link href="resources/css/minimal.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-wysihtml5.css" />
+    <link rel="stylesheet" type="text/css" href="resources/css/bootstrap-wysihtml5.css"/>
 
     <!-- Custom styles for this template -->
     <link href="resources/css/style3860.css?v=1" rel="stylesheet">
@@ -68,14 +68,14 @@
 
 
 <div class="container">
-<div class="row"><br/><br/><br/></div>
+    <div class="row"><br/><br/><br/></div>
 
 
     <div class="row">
         <div class="col-sm-3">
             <section class="panel">
                 <div class="panel-body">
-                    <a href="compose"  class="btn btn-compose">
+                    <a href="compose" class="btn btn-compose">
                         Compose Mail
                     </a>
                     <ul class="nav nav-pills nav-stacked mail-nav">
@@ -98,25 +98,31 @@
                     </h4>
                 </header>
                 <div class="panel-body">
-                    <div class="compose-btn pull-right">
-                        <button type="submit" class="btn btn-primary btn-sm" onclick="return submitIt()"><i class="fa fa-check"></i> Send</button>
-                        <button class="btn btn-sm"><i class="fa fa-times"></i> Discard</button>
-                        <button class="btn btn-sm">Draft</button>
-                    </div>
-                    <div class="compose-mail">
-                        <form role="form-horizontal" method="post" action="sent">
+                    <form role="form-horizontal" method="post" action="sent">
+                        <div class="compose-btn pull-right">
+                            <button type="submit" class="btn btn-primary btn-sm" onclick="return submitIt()"><i
+                                    class="fa fa-check"></i> Send
+                            </button>
+                            <a class="btn btn-sm" href="inbox"><i class="fa fa-times"></i> Discard</a>
+                            <button class="btn btn-sm">Draft</button>
+                        </div>
+
+                        <div class="compose-mail">
+
                             <div class="form-group">
                                 <label for="source" class="">To:</label>
-                                <select class="form-control"  style="width: 300px" id="source">
+                                <select class="form-control" style="width: 300px" id="source">
                                     <c:forEach items="${emails}" var="name" varStatus="count">
-                                    <option value="<c:out value="${count}"/>"><c:out value="${name}"/></option>
+                                        <option value="<c:out value="${count}"/>"><c:out value="${name}"/></option>
                                     </c:forEach>
                                 </select>
                                 <input type="hidden" name="to" tabindex="1" id="to" class="form-control">
 
                                 <div class="compose-options">
-                                    <a onclick="$(this).hide(); $('#cc').parent().removeClass('hidden'); $('#cc').focus();" href="javascript:;">Cc</a>
-                                    <a onclick="$(this).hide(); $('#bcc').parent().removeClass('hidden'); $('#bcc').focus();" href="javascript:;">Bcc</a>
+                                    <a onclick="$(this).hide(); $('#cc').parent().removeClass('hidden'); $('#cc').focus();"
+                                       href="javascript:;">Cc</a>
+                                    <a onclick="$(this).hide(); $('#bcc').parent().removeClass('hidden'); $('#bcc').focus();"
+                                       href="javascript:;">Bcc</a>
                                 </div>
                             </div>
 
@@ -140,20 +146,23 @@
                                 <%--<input type="file" class="default">--%>
                             </div>
                             <div class="compose-btn">
-                                <button class="btn btn-primary btn-sm" type="submit" onclick="return submitIt()"><i class="fa fa-check"></i> Send</button>
-                                <button class="btn btn-sm"><i class="fa fa-times"></i> Discard</button>
+                                <button class="btn btn-primary btn-sm" type="submit" onclick="return submitIt()"><i
+                                        class="fa fa-check"></i> Send
+                                </button>
+                                <a class="btn btn-sm" href="inbox"><i class="fa fa-times"></i> Discard</a>
                                 <button class="btn btn-sm">Draft</button>
                             </div>
 
-                        </form>
-                    </div>
+
+                        </div>
+                    </form>
                 </div>
             </section>
         </div>
     </div>
 
 
-<!-- Main component for a primary marketing message or call to action -->
+    <!-- Main component for a primary marketing message or call to action -->
 
 
 </div>
@@ -176,17 +185,17 @@
     //wysihtml5 end
 </script>
 <script type="text/javascript">
-    function submitIt(){
+    function submitIt() {
         var e = document.getElementById("source");
         var strUser = e.options[e.selectedIndex].text;
-        document.getElementById("to").value=strUser;
+        document.getElementById("to").value = strUser;
         return true;
     }
-    function load(){
-        var x=<c:out value="${senderId}"/>;
-        if(!isNaN(x) && x>0){
-            document.getElementById("source").selectedIndex =x;
-            document.getElementById("source").disabled=true;
+    function load() {
+        var x =<c:out value="${senderId}"/>;
+        if (!isNaN(x) && x >= 0) {
+            document.getElementById("source").selectedIndex = x;
+            document.getElementById("source").disabled = true;
         }
     }
 
