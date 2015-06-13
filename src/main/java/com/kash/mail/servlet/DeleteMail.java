@@ -31,6 +31,8 @@ public class DeleteMail extends HttpServlet {
             List<Email> sendEmails= DataLayer.loadSendEmails(user.getId());
             session.setAttribute("inboxMails",inboxMails);
             session.setAttribute("sendEmails",sendEmails);
+            session.setAttribute("outboxCount",sendEmails.size());
+            session.setAttribute("inboxCount",inboxMails.size());
             response.sendRedirect("inbox");
         }else{
             session.setAttribute("error", "Session Expired");

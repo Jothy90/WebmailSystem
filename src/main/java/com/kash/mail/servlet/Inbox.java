@@ -27,6 +27,7 @@ public class Inbox extends HttpServlet {
         if(session.getAttribute("user")!=null){
             List<Email> inboxMails= DataLayer.loadInboxMails(((LoginUser)session.getAttribute("user")).getId());
             session.setAttribute("inboxMails",inboxMails);
+            session.setAttribute("inboxCount",inboxMails.size());
             RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/inbox.jsp");
             dispatcher.forward(request, response);
         }else{

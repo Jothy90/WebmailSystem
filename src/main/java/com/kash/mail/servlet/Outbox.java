@@ -27,6 +27,7 @@ public class Outbox extends HttpServlet {
         if(session.getAttribute("user")!=null){
             List<Email> sendEmails= DataLayer.loadSendEmails(((LoginUser) session.getAttribute("user")).getId());
             session.setAttribute("sendEmails",sendEmails);
+            session.setAttribute("outboxCount",sendEmails.size());
             RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/outbox.jsp");
             dispatcher.forward(request, response);
         }else{

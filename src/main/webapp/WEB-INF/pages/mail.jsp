@@ -78,10 +78,10 @@
                         Compose Mail
                     </a>
                     <ul class="nav nav-pills nav-stacked mail-nav">
-                        <li class="active"><a href="inbox"> <i class="fa fa-inbox"></i> Inbox  <span class="label label-danger pull-right inbox-notification">9</span></a></li>
+                        <li><a href="inbox"> <i class="fa fa-inbox"></i> Inbox</a></li>
                         <li><a href="outbox"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
                         <li><a href="#"> <i class="fa fa-certificate"></i> Important</a></li>
-                        <li><a href="#"> <i class="fa fa-file-text-o"></i> Drafts <span class="label label-info pull-right inbox-notification">123</span></a></li>
+                        <li><a href="#"> <i class="fa fa-file-text-o"></i> Drafts</a></li>
                         <li><a href="#"> <i class="fa fa-trash-o"></i> Trash</a></li>
                     </ul>
                 </div>
@@ -106,9 +106,9 @@
                         </div>
                         <div class="col-md-4">
                             <div class="compose-btn pull-right">
-                                <a href="mail_compose.html" class="btn btn-sm btn-primary" ><i class="fa fa-reply"></i> Reply</a>
+                                <a href="compose" class="btn btn-sm btn-primary" ><i class="fa fa-reply"></i> Reply</a>
                                 <button class="btn  btn-sm tooltips" data-original-title="Print" type="button" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-print"></i> </button>
-                                <button class="btn btn-sm tooltips" data-original-title="Trash" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-trash-o"></i></button>
+                                <a href="delete?id=<c:out value="${email.id}"/>" class="btn btn-sm tooltips" data-original-title="Trash" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-trash-o"></i></a>
                             </div>
                         </div>
 
@@ -138,10 +138,10 @@
                         <p> ${email.message}</p>
                     </div>
                     <div class="compose-btn pull-left">
-                        <a href="mail_compose.html" class="btn btn-sm btn-primary" ><i class="fa fa-reply"></i> Reply</a>
+                        <a href="compose" class="btn btn-sm btn-primary" ><i class="fa fa-reply"></i> Reply</a>
                         <button class="btn btn-sm " ><i class="fa fa-arrow-right"></i> Forward</button>
                         <button class="btn  btn-sm tooltips" data-original-title="Print" type="button" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-print"></i> </button>
-                        <button class="btn btn-sm tooltips" data-original-title="Trash" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-trash-o"></i></button>
+                        <a href="delete?id=<c:out value="${email.id}"/>" class="btn btn-sm tooltips" data-original-title="Trash" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-trash-o"></i></a>
                     </div>
                 </div>
             </section>

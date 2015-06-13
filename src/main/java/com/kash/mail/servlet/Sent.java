@@ -40,6 +40,7 @@ public class Sent extends HttpServlet {
 
             List<Email> sendEmails= DataLayer.loadSendEmails(((LoginUser)session.getAttribute("user")).getId());
             session.setAttribute("sendEmails",sendEmails);
+            session.setAttribute("outboxCount",sendEmails.size());
             response.sendRedirect("inbox");
         }else{
             session.setAttribute("error", "Session Expired");

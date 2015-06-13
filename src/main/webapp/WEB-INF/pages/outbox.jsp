@@ -79,12 +79,10 @@
                         Compose Mail
                     </a>
                     <ul class="nav nav-pills nav-stacked mail-nav">
-                        <li class="active"><a href="inbox"> <i class="fa fa-inbox"></i> Inbox <span
-                                class="label label-danger pull-right inbox-notification">9</span></a></li>
-                        <li><a href="outbox"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
+                        <li><a href="inbox"> <i class="fa fa-inbox"></i> Inbox</a></li>
+                        <li class="active"><a href="outbox"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
                         <li><a href="#"> <i class="fa fa-certificate"></i> Important</a></li>
-                        <li><a href="#"> <i class="fa fa-file-text-o"></i> Drafts <span
-                                class="label label-info pull-right inbox-notification">123</span></a></li>
+                        <li><a href="#"> <i class="fa fa-file-text-o"></i> Drafts </a></li>
                         <li><a href="#"> <i class="fa fa-trash-o"></i> Trash</a></li>
                     </ul>
                 </div>
@@ -93,7 +91,7 @@
         <div class="col-sm-9">
             <section class="panel">
                 <header class="panel-heading wht-bg">
-                    <h4 class="gen-case">OutBox (34)
+                    <h4 class="gen-case">OutBox (<c:out value="${outboxCount}"/>)
                         <form action="#" class="pull-right mail-src-position">
                             <div class="input-append">
                                 <input type="text" class="form-control " placeholder="Search Mail">
@@ -130,7 +128,7 @@
 
 
                         <ul class="unstyled inbox-pagination">
-                            <li><span>1-50 of 124</span></li>
+                            <li><span>1-<c:out value="${outboxCount}"/> of <c:out value="${outboxCount}"/></span></li>
                             <li>
                                 <a class="np-btn" href="#"><i class="fa fa-angle-left  pagination-left"></i></a>
                             </li>

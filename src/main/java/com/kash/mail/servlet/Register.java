@@ -41,6 +41,8 @@ public class Register extends HttpServlet {
         HttpSession session = request.getSession(true);
         session.setAttribute("inboxMails",inboxMails);
         session.setAttribute("sendEmails",sendEmails);
+        session.setAttribute("outboxCount",sendEmails.size());
+        session.setAttribute("inboxCount",inboxMails.size());
         session.setAttribute("user", loginUser);
         response.sendRedirect("inbox");
     }

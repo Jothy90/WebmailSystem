@@ -27,6 +27,7 @@ public class LoadMail extends HttpServlet {
             session.setAttribute("email", email);
             RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/mail.jsp");
             dispatcher.forward(request, response);
+
         }else{
             session.setAttribute("error", "Session Expired");
             response.sendRedirect("login.jsp");

@@ -40,6 +40,8 @@ public class Login extends HttpServlet {
             session.setAttribute("user", user);
             session.setAttribute("inboxMails",inboxMails);
             session.setAttribute("sendEmails",sendEmails);
+            session.setAttribute("outboxCount",sendEmails.size());
+            session.setAttribute("inboxCount",inboxMails.size());
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/inbox.jsp");
             dispatcher.forward(request, response);

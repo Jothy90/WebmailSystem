@@ -79,10 +79,10 @@
                         Compose Mail
                     </a>
                     <ul class="nav nav-pills nav-stacked mail-nav">
-                        <li class="active"><a href="inbox"> <i class="fa fa-inbox"></i> Inbox  <span class="label label-danger pull-right inbox-notification">9</span></a></li>
+                        <li><a href="inbox"> <i class="fa fa-inbox"></i> Inbox </a></li>
                         <li><a href="outbox"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
                         <li><a href="#"> <i class="fa fa-certificate"></i> Important</a></li>
-                        <li><a href="#"> <i class="fa fa-file-text-o"></i> Drafts <span class="label label-info pull-right inbox-notification">123</span></a></li>
+                        <li><a href="#"> <i class="fa fa-file-text-o"></i> Drafts </a></li>
                         <li><a href="#"> <i class="fa fa-trash-o"></i> Trash</a></li>
                     </ul>
                 </div>
@@ -101,7 +101,7 @@
                 </header>
                 <div class="panel-body">
                     <div class="compose-btn pull-right">
-                        <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-check"></i> Send</button>
+                        <button type="submit" class="btn btn-primary btn-sm" onclick="return submitIt()"><i class="fa fa-check"></i> Send</button>
                         <button class="btn btn-sm"><i class="fa fa-times"></i> Discard</button>
                         <button class="btn btn-sm">Draft</button>
                     </div>
@@ -142,9 +142,9 @@
                                 <%--<input type="file" class="default">--%>
                             </div>
                             <div class="compose-btn">
-                                <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-check"></i> Send</button>
+                                <button class="btn btn-primary btn-sm" type="submit" onclick="return submitIt()"><i class="fa fa-check"></i> Send</button>
                                 <button class="btn btn-sm"><i class="fa fa-times"></i> Discard</button>
-                                <%--<button class="btn btn-sm">Draft</button>--%>
+                                <button class="btn btn-sm">Draft</button>
                             </div>
 
                         </form>
