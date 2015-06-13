@@ -80,8 +80,6 @@
                     <ul class="nav nav-pills nav-stacked mail-nav">
                         <li><a href="inbox"> <i class="fa fa-inbox"></i> Inbox</a></li>
                         <li><a href="outbox"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
-                        <li><a href="#"> <i class="fa fa-certificate"></i> Important</a></li>
-                        <li><a href="#"> <i class="fa fa-file-text-o"></i> Drafts</a></li>
                         <li><a href="#"> <i class="fa fa-trash-o"></i> Trash</a></li>
                     </ul>
                 </div>
@@ -106,8 +104,15 @@
                         </div>
                         <div class="col-md-4">
                             <div class="compose-btn pull-right">
-                                <a href="compose" class="btn btn-sm btn-primary" ><i class="fa fa-reply"></i> Reply</a>
-                                <button class="btn  btn-sm tooltips" data-original-title="Print" type="button" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-print"></i> </button>
+                                <c:choose>
+                                    <c:when test="${email.sendTo==user.userName}">
+                                        <a href="compose?reply=<c:out value="${email.sendFrom}"/>" class="btn btn-sm btn-primary" ><i class="fa fa-reply"></i> Reply</a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="compose?reply=<c:out value="${email.sendTo}"/>" class="btn btn-sm btn-primary" ><i class="fa fa-reply"></i> Reply</a>
+                                    </c:otherwise>
+                                </c:choose>
+                                <%--<a href="compose" class="btn btn-sm btn-primary" ><i class="fa fa-reply"></i> Reply</a>--%>
                                 <a href="delete?id=<c:out value="${email.id}"/>" class="btn btn-sm tooltips" data-original-title="Trash" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-trash-o"></i></a>
                             </div>
                         </div>
@@ -138,9 +143,15 @@
                         <p> ${email.message}</p>
                     </div>
                     <div class="compose-btn pull-left">
-                        <a href="compose" class="btn btn-sm btn-primary" ><i class="fa fa-reply"></i> Reply</a>
+                        <c:choose>
+                            <c:when test="${email.sendTo==user.userName}">
+                                <a href="compose?reply=<c:out value="${email.sendFrom}"/>" class="btn btn-sm btn-primary" ><i class="fa fa-reply"></i> Reply</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="compose?reply=<c:out value="${email.sendTo}"/>" class="btn btn-sm btn-primary" ><i class="fa fa-reply"></i> Reply</a>
+                            </c:otherwise>
+                        </c:choose>
                         <button class="btn btn-sm " ><i class="fa fa-arrow-right"></i> Forward</button>
-                        <button class="btn  btn-sm tooltips" data-original-title="Print" type="button" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-print"></i> </button>
                         <a href="delete?id=<c:out value="${email.id}"/>" class="btn btn-sm tooltips" data-original-title="Trash" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-trash-o"></i></a>
                     </div>
                 </div>

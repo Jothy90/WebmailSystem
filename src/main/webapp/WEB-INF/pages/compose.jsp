@@ -31,7 +31,7 @@
 
 </head>
 
-<body style="margin-top:60px">
+<body style="margin-top:60px" onload="load()">
 
 
 <!-- Fixed navbar -->
@@ -81,8 +81,6 @@
                     <ul class="nav nav-pills nav-stacked mail-nav">
                         <li><a href="inbox"> <i class="fa fa-inbox"></i> Inbox </a></li>
                         <li><a href="outbox"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
-                        <li><a href="#"> <i class="fa fa-certificate"></i> Important</a></li>
-                        <li><a href="#"> <i class="fa fa-file-text-o"></i> Drafts </a></li>
                         <li><a href="#"> <i class="fa fa-trash-o"></i> Trash</a></li>
                     </ul>
                 </div>
@@ -183,6 +181,13 @@
         var strUser = e.options[e.selectedIndex].text;
         document.getElementById("to").value=strUser;
         return true;
+    }
+    function load(){
+        var x=<c:out value="${senderId}"/>;
+        if(!isNaN(x) && x>0){
+            document.getElementById("source").selectedIndex =x;
+            document.getElementById("source").disabled=true;
+        }
     }
 
 </script>

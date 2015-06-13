@@ -81,8 +81,6 @@
                     <ul class="nav nav-pills nav-stacked mail-nav">
                         <li><a href="inbox"> <i class="fa fa-inbox"></i> Inbox</a></li>
                         <li class="active"><a href="outbox"> <i class="fa fa-envelope-o"></i> Send Mail</a></li>
-                        <li><a href="#"> <i class="fa fa-certificate"></i> Important</a></li>
-                        <li><a href="#"> <i class="fa fa-file-text-o"></i> Drafts </a></li>
                         <li><a href="#"> <i class="fa fa-trash-o"></i> Trash</a></li>
                     </ul>
                 </div>
@@ -111,11 +109,11 @@
                                     All
                                     <i class="fa fa-angle-down "></i>
                                 </a>
-                                <ul class="dropdown-menu">
+                                <%--<ul class="dropdown-menu">
                                     <li><a href="#"> None</a></li>
                                     <li><a href="#"> Read</a></li>
                                     <li><a href="#"> Unread</a></li>
-                                </ul>
+                                </ul>--%>
                             </div>
                         </div>
 
