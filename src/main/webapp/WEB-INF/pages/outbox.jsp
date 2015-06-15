@@ -177,10 +177,10 @@
     inputBox.onkeyup = function () {
 
         <c:forEach items="${sendEmails}" var="mail" varStatus="count">
-        if ('<c:out value="${mail.message}"/>'.search(inputBox.value) > 0 || '<c:out value="${mail.sendTo}"/>'.search(inputBox.value) > 0 || '<c:out value="${mail.subject}"/>'.search(inputBox.value) > 0) {
-            document.getElementById('mail<c:out value="${count.index}"/>').style.display = 'inline';
+        if ('<c:out value="${mail.message}"/>'.search(inputBox.value) >= 0 || '<c:out value="${mail.sendTo}"/>'.search(inputBox.value) >= 0 || '<c:out value="${mail.subject}"/>'.search(inputBox.value) >= 0) {
+            document.getElementById('mail<c:out value="${count.index}"/>').style.display = 'block';
         } else {
-            document.getElementById('mail<c:out value="${count.index}"/>').style.display = 'none';
+            document.getElementById('mail<c:out value="${count.index}"/>').style.display= 'none';
         }
         </c:forEach>
     }

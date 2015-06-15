@@ -90,11 +90,11 @@
             <section class="panel">
                 <header class="panel-heading wht-bg">
                     <h4 class="gen-case"> Compose Mail
-                        <form action="#" class="pull-right mail-src-position">
+                        <%--<form action="#" class="pull-right mail-src-position">
                             <div class="input-append">
                                 <input type="text" class="form-control " placeholder="Search Mail">
                             </div>
-                        </form>
+                        </form>--%>
                     </h4>
                 </header>
                 <div class="panel-body">
