@@ -1,4 +1,4 @@
-package com.kash.mail;
+package com.kash.mail.rmi;
 
 /**
  * Created by john on 6/15/15.

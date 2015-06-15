@@ -1,4 +1,4 @@
-package com.kash.mail;
+package com.kash.mail.rmi;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -16,7 +16,7 @@ public class Client {
         } catch (Exception e) {
             System.err.println("Client exception: " + e.toString());
             e.printStackTrace();
-            return "ERROR";
+            return "RMI Server Not connected";
         }
     }
 }

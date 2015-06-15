@@ -1,6 +1,6 @@
 package com.kash.mail.servlet;
 
-import com.kash.mail.Client;
+import com.kash.mail.rmi.Client;
 import com.kash.mail.repository.DataLayer;
 import com.kash.mail.repository.model.Email;
 import com.kash.mail.repository.model.LoginUser;

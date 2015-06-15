@@ -1,8 +1,6 @@
 package com.kash.mail.repository;
 
-import com.kash.mail.repository.model.Email;
-import com.kash.mail.repository.model.LoginUser;
-import com.kash.mail.repository.model.UserProfile;
+import com.kash.mail.rmi.Client;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,7 +23,8 @@ public class DbConnection {
     }
 
     public static void main(String args[]){
-          System.out.println(DataLayer.isExistingUserName("kamalan"));
+        System.out.println(Client.getQuote());
+        /*System.out.println(DataLayer.isExistingUserName("kamalan"));
 
         LoginUser l1 = new LoginUser();
         l1.setUserName("kamalan");
@@ -48,7 +47,7 @@ public class DbConnection {
         e1.setSendTo("kamalan");
         e1.setDate("10-06-2105");
         e1.setMessage("hi; how are you?");
-        e1.setSubject("introduction");
+        e1.setSubject("introduction");*/
 
 //        System.out.println(DataLayer.insertMail(e1));
 
