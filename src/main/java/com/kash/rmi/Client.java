@@ -1,4 +1,4 @@
-package com.kash.mail.rmi;
+package com.kash.rmi;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;

@@ -1,6 +1,6 @@
 package com.kash.mail.repository;
 
-import com.kash.mail.rmi.Client;
+import com.kash.rmi.Client;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
