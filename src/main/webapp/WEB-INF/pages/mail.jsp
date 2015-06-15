@@ -141,6 +141,7 @@
                     </div>
                     <div class="view-mail">
                         <p> ${email.message}</p>
+                        <br/>
                     </div>
                     <div class="compose-btn pull-left">
                         <c:choose>
@@ -154,7 +155,19 @@
                         <button class="btn btn-sm " ><i class="fa fa-arrow-right"></i> Forward</button>
                         <a href="delete?id=<c:out value="${email.id}"/>" class="btn btn-sm tooltips" data-original-title="Trash" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-trash-o"></i></a>
                     </div>
+
                 </div>
+            </section>
+            <section class="panel">
+                <div class="panel-body ">
+                    <div class="view-mail">
+                        <br/>
+                        <strong>Quote for This Reading :</strong>
+
+                        <p>${quote}</p>
+                        <br/>
+                    </div>
+                    </div>
             </section>
         </div>
     </div>

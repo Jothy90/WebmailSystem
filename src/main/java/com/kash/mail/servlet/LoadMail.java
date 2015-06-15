@@ -2,6 +2,7 @@ package com.kash.mail.servlet;
 
 import com.kash.mail.repository.DataLayer;
 import com.kash.mail.repository.model.Email;
+import com.kash.rmi.Client;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -24,6 +25,8 @@ public class LoadMail extends HttpServlet {
 
         if(session.getAttribute("user")!=null){
             Email email= DataLayer.getEmailById(Integer.parseInt(request.getParameter("id")));
+            String msg = email.getMessage();
+            session.setAttribute("quote",  Client.getQuote());
             session.setAttribute("email", email);
             RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/pages/mail.jsp");
             dispatcher.forward(request, response);

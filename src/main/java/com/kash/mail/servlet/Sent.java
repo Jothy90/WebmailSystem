@@ -30,7 +30,7 @@ public class Sent extends HttpServlet {
         if(session.getAttribute("user")!=null){
             Email email=new Email();
             email.setSendTo(request.getParameter("to"));
-            email.setSubject(request.getParameter("subject") + "\n Quote for Mail: " + Client.getQuote());
+            email.setSubject(request.getParameter("subject"));
             email.setMessage(request.getParameter("body"));
             email.setSendFrom(((LoginUser)session.getAttribute("user")).getUserName());
 

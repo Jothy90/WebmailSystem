@@ -91,7 +91,7 @@
                     <h4 class="gen-case">Inbox (<c:out value="${inboxCount}"/>)
                         <form action="#" class="pull-right mail-src-position">
                             <div class="input-append">
-                                <input type="text" class="form-control " placeholder="Search Mail">
+                                <input type="text" id="search" class="form-control " placeholder="Search Mail">
                             </div>
                         </form>
                     </h4>
@@ -137,9 +137,9 @@
                     <div class="table-inbox-wrap ">
                         <table class="table table-inbox table-hover">
                             <tbody>
-                                <c:forEach items="${inboxMails}" var="mail">
+                                <c:forEach items="${inboxMails}" var="mail" varStatus="count">
 
-                                    <tr class="unread">
+                                    <tr class="unread" id="mail<c:out value="${count.index}"/>">
                                         <td class="inbox-small-cells">
                                             <input type="checkbox" class="mail-checkbox">
                                         </td>
@@ -172,7 +172,20 @@
 <script src="resources/js/bootstrap.min.js"></script>
 
 <script src="resources/js/jquery.icheck.js"></script>
+<script type="text/javascript">
+    var inputBox = document.getElementById('search');
+    inputBox.onkeyup = function () {
 
+        <c:forEach items="${inboxMails}" var="mail" varStatus="count">
+        if ('<c:out value="${mail.message}"/>'.search(inputBox.value) < 0) {
+            document.getElementById('mail<c:out value="${count.index}"/>').style.display = 'none';
+        }else {
+            document.getElementById('mail<c:out value="${count.index}"/>').style.display = 'inline';
+        }
+        </c:forEach>
+    }
+
+</script>
 
 </body>
 </html>
