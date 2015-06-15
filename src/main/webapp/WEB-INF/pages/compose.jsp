@@ -189,6 +189,12 @@
         var e = document.getElementById("source");
         var strUser = e.options[e.selectedIndex].text;
         document.getElementById("to").value = strUser;
+
+        var x =document.getElementById("subject").value;
+        if (x == null || x == "") {
+            alert("Subject must be filled out");
+            return false;
+        }
         return true;
     }
     function load() {
@@ -198,7 +204,6 @@
             document.getElementById("source").disabled = true;
         }
     }
-
 </script>
 
 </body>

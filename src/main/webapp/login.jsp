@@ -32,15 +32,15 @@
 
 <div class="container">
 
-    <form method="post" class="form-signin" action="login">
+    <form method="post" name="signInForm" class="form-signin" action="login">
         <h2 class="form-signin-heading">sign in now</h2>
 
         <div class="login-wrap">
             <div class="user-login-info">
-                <input type="text" name="userName" class="form-control" placeholder="User Name" autofocus>
-                <input type="password" name="password" class="form-control" placeholder="Password">
+                <input type="text" name="userName"  class="form-control" placeholder="User Name" autofocus>
+                <input type="password" name="password"  class="form-control" placeholder="Password">
             </div>
-            <button class="btn btn-lg btn-login btn-block" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-login btn-block" type="submit" onclick="return signInValidate()">Sign in</button>
 
             <div class="registration">
                 Don't have an account yet?
@@ -51,7 +51,7 @@
 
         </div>
     </form>
-    <form action="registerMe" class="form-signin" method="post">
+    <form action="registerMe" name="registerForm" class="form-signin" method="post">
         <!-- Modal -->
         <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal"
              class="modal fade">
@@ -82,7 +82,7 @@
                         </div>
                         <div class="modal-footer">
                             <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-                            <button class="btn btn-success" type="submit">Submit</button>
+                            <button class="btn btn-success" type="submit" onclick="return formValidate()">Submit</button>
                         </div>
                     </div>
 
@@ -101,6 +101,69 @@
 <!--Core js-->
 <script src="resources/js/jquery.js"></script>
 <script src="resources/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    function signInValidate(){
+        var x = document.forms["signInForm"]["userName"].value;
+        var y = document.forms["signInForm"]["password"].value;
+        var r=true;
+        if (x == null || x == "") {
+            alert("User Name must be filled out");
+            r=false;
+        }
+
+        if (y == null || y == "") {
+            alert("Password must be filled out");
+            r=false;
+        }
+        if(r){
+            return true;
+        }
+        return false;
+    }
+
+    function formValidate(){
+        var firstName = document.forms["registerForm"]["firstName"].value;
+        var lastName = document.forms["registerForm"]["lastName"].value;
+        var userName = document.forms["registerForm"]["userName"].value;
+        var password = document.forms["registerForm"]["password"].value;
+        var passwordRe = document.forms["registerForm"]["passwordRe"].value;
+
+        var r=true;
+        if (firstName == null || firstName == "") {
+            alert("First Name must be filled out");
+            r=false;
+        }
+        if (lastName == null || lastName == "") {
+            alert("Last Name must be filled out");
+            r=false;
+        }
+        if (userName == null || userName == "") {
+            alert("User Name must be filled out");
+            r=false;
+        }
+        if (password == null || password == "") {
+            alert("Password must be filled out");
+            r=false;
+        }
+        if (r) {
+            if (passwordRe == null || passwordRe == "") {
+                alert("Please Retype Password");
+                r=false;
+            }
+        }
+        if (r) {
+            if(password!=passwordRe){
+                alert("Passwords type doesn't mach");
+                r=false;
+            }
+        }
+
+        if(r){
+            return true;
+        }
+        return false;
+    }
+</script>
 
 </body>
 
