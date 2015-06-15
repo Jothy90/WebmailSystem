@@ -1,5 +1,6 @@
 package com.kash.mail.servlet;
 
+import com.kash.mail.Client;
 import com.kash.mail.repository.DataLayer;
 import com.kash.mail.repository.model.Email;
 import com.kash.mail.repository.model.LoginUser;
@@ -29,7 +30,7 @@ public class Sent extends HttpServlet {
         if(session.getAttribute("user")!=null){
             Email email=new Email();
             email.setSendTo(request.getParameter("to"));
-            email.setSubject(request.getParameter("subject"));
+            email.setSubject(request.getParameter("subject") + "\n Quote for Mail: " + Client.getQuote());
             email.setMessage(request.getParameter("body"));
             email.setSendFrom(((LoginUser)session.getAttribute("user")).getUserName());
 
